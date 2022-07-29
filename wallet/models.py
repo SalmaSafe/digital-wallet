@@ -1,5 +1,6 @@
 import email
 from pyexpat import model
+from tkinter import CASCADE
 from django.db import models
 
 # Create your models here.
@@ -18,7 +19,7 @@ class Account(models.Model):
     balance = models.IntegerField()
 
 class Wallet(models.Model):
-    pin=models.SmallIntegerField(max_length=10)
+    pin=models.SmallIntegerField()
     date_created=models.DateTimeField()
     amount = models.IntegerField()   
 
@@ -29,7 +30,7 @@ class Transaction(models.Model):
 class Card(models.Model):
     cardholder_number = models.IntegerField()
     expiry_date = models.DateField()
-    cardholder_name= models.CharField()
+    cardholder_name= models.CharField(max_length=30)
     
 class ThirdParty(models.Model):
     balance = models.IntegerField()
@@ -38,23 +39,23 @@ class ThirdParty(models.Model):
 
 class Notification(models.Model):
      date = models.DateTimeField()
-     status = models.CharField()
-     recepient = models.CharField()
+     status = models.CharField(max_length=40)
+     wallet = models.ForeignKey(default=1, on_delete=models.CASCADE, to=Wallet)
 
 class Receipt(models.Model):
-    transaction = models.ForeignKey()
+    transaction = models.IntegerField()
     receipt_date= models.DateTimeField()
     total_Amount= models.IntegerField()
 
 class Loan(models.Model):
-    wallet = models.ForeignKey()
+    wallet = models.ForeignKey(default=1, on_delete=models.CASCADE, to=Wallet)
     interest_rate = models.IntegerField()
     loan_balance = models.IntegerField()
 
 class Reward(models.Model):
-    transaction = models.ForeignKey()
+    transaction = models.ForeignKey(default=1, on_delete=models.CASCADE, to=Transaction)
     date_of_reward = models.DateTimeField()
-    recepient = models.ForeignKey()       
+    account = models.ForeignKey(default=1, on_delete=models.CASCADE, to=Account)       
 
 
 
