@@ -2,7 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 # Add model to admin dashboard.
-from .models import  Account, Card, Customer, Loan, Notification, Receipt, ThirdParty, Transaction, Wallet,Reward
+from .models import  Account, Card, Customer, Loan, Notification, Receipt, ThirdParty, Transaction, Wallet,Reward,Recepient
 admin.site.register(Customer)
 admin.site.register(Account)
 admin.site.register(Wallet)
