@@ -1,0 +1,8 @@
+<h2>Reward Registration</h2>
+<a href="{url 'account'}">Account</a>
+
+<form method="POST">{%csrf_token%}
+    {{form.as_p}}
+
+    <button type="button" class="save btn btn">Save</button>
+</form>

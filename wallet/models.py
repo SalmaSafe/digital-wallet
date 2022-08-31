@@ -14,32 +14,57 @@ class Customer(models.Model):
     email = models.EmailField()
     phonenumber = models.CharField(max_length=10,null=True)
     age= models.PositiveSmallIntegerField()
+    GENDER_CHOICES = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
     gender =models.CharField(max_length=7,null=True)
+    customer_id= models.CharField(max_length=15,null=True)
+    nationality=models.CharField(max_length=15,null=True)
+    profile_picture= models.ImageField(upload_to='profile_picture',null=True)
 
 class Account(models.Model):
     account_number = models.CharField(max_length=20,null=True)
     account_name= models.CharField(max_length=30,null=True)
     balance = models.IntegerField()
     account_pin = models.PositiveSmallIntegerField(null=True)
+    account_choices=(
+        ('w', 'withdraw'),
+        ('S', 'Savings'),
+        ('D', 'Deposit')
+
+    )
+    account_type= models.CharField(max_length=15, choices=account_choices,null=True)
+
     
 
 class Wallet(models.Model):
     pin=models.SmallIntegerField()
     date_created=models.DateTimeField(default=datetime.now)
     balance = models.IntegerField() 
-    customer=models.ForeignKey(Customer,related_name='customer_a', on_delete=models.CASCADE,null=True)
-    currency = models.ForeignKey(Customer,related_name='customer_b', on_delete=models.CASCADE,null=True)  
+    account_wallet = models.ForeignKey("Account",on_delete= models.CASCADE, related_name= "account_wallet", null=True)    
+    CURRENCY_CHOICES = (
+        ('K','Shilling'),
+        ('$','Dollar'),
+        ('EU','Euros'),
+    )
+    currency = models.CharField(max_length= 15, choices= CURRENCY_CHOICES,null=True)  
 
 class Transaction(models.Model):
     transaction_amount = models.IntegerField(null=True)
     date_time = models.DateTimeField(default=datetime.now,null=True)
     transaction_charge = models.IntegerField(null=True)
+    wallet_one = models.ForeignKey("Wallet",on_delete= models.CASCADE,related_name="Transaction_wallet",null=True)
     destination_account = models.ForeignKey( Account,on_delete=models.CASCADE,related_name='account_a',null=True)
     origin_account =models.ForeignKey(Account, on_delete=models.CASCADE,related_name='account_b',null=True)
     receipt=models.ForeignKey(Account, on_delete=models.CASCADE,related_name='account_c',null=True)
     transaction_date = models.DateTimeField(default=datetime.now)
     transaction_charge = models.IntegerField(null=True)
-    transaction_type = models.CharField(max_length=20,null=True)
+    TRASACTION_TYPE_CHOICES = (
+        ('D','Debit'),
+        ('C','Credit'),
+    )
+    transaction_type = models.CharField(max_length=20, choices= TRASACTION_TYPE_CHOICES,null=True)
     wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE,null=True)
     transaction_ref = models.CharField(max_length=20,null=True)
 class Card(models.Model):
@@ -47,7 +72,11 @@ class Card(models.Model):
     expiry_date = models.DateField(default=datetime.now)
     cardholder_name= models.CharField(max_length=30,null=True)
     date_issued = models.DateTimeField(default=datetime.now)
-    card_type = models.CharField(max_length=25,null=True)
+    CARD_TYPE_CHOICES = (
+        ('C','Credit card'),
+        ('D','Debit card'),
+    )
+    card_type = models.CharField(max_length=25,choices=CARD_TYPE_CHOICES, null=True)
     card_status = models.CharField(max_length=20,null=True)
     CVV_Security_code = models.IntegerField(null=True)
     wallet = models.ForeignKey(Wallet, on_delete=models.CASCADE,null=True)
