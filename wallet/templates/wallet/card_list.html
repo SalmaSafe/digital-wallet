@@ -1,0 +1,19 @@
+<table> 
+    <th>
+        <td>FullName</td>
+        <td>Card number</td>
+        <td>expiry date</td>
+        <td>date issued</td>
+        <td>card type</td>
+    </th>
+    {% for card in cards %}
+    <tr>
+            <td>{{ card.cardholder_name }}</td>
+            <td>{{ card.cardholder_number }}</td>
+            <td>{{ card.expiry_date }}</td>
+            <td>{{ card.date_issued }}</td>
+            <td>{{ card.CARD_TYPE_CHOICES }}</td>
+    </tr>
+{%endfor%}
+    
+</table>

@@ -1,0 +1,19 @@
+<table> 
+    <th>
+        <td>Withdraw</td>
+        <td>Transaction Charge</td>
+        <td>Transaction account</td>
+        <td>Date/time</td>
+        <td>Receipt</td>
+    </th>
+    {% for transaction in transactions %}
+    <tr>
+        <td>{{ transaction.transaction_amount }}</td>
+        <td>{{ transaction.transaction_charge }}</td>
+        <td>{{ transaction.transaction_account }}</td>
+        <td>{{ transaction.date_time }}</td>
+        <td>{{ transaction.receipt }}</td>
+    </tr>
+{%endfor%}
+
+</table>

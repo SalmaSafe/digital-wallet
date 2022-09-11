@@ -1,0 +1,18 @@
+<table> 
+    <th>
+        <td>Transaction</td>
+        <td>Date of reward</td>
+        <td>Gender</td>
+        <td>Bonus point</td>
+    </th>
+    {% for reward in rewards %}
+    <tr>
+        <td>{{ card.transaction }}</td>
+        <td>{{ card.date_of_reward }}</td>
+        <td>{{ card.gender }}</td>
+        <td>{{ card.bonus_points }}</td>
+        
+    </tr>
+{%endfor%}
+
+</table>
