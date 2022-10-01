@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>{{wallet.balance}} </h1>
+    
+    <h2>{{wallet.account_wallet}}</h2>
+    <h3>{{wallet.CURRENCY_CHOICES}}</h3>
+
+    <a href="{%url 'edit_wallet' id=wallet.id%}">Edit</a>
+
+    
+</body>
+</html>
