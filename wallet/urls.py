@@ -31,12 +31,12 @@ urlpatterns=[
     path("wallets/edit/<int:id>", views.edit_wallet,name="edit_wallet"),
     path("cards/<int:id>/", views.card_profile,name="card_profile"),
     path("cards/edit/<int:id>", views.edit_card,name="edit_card"),
-    path("cards/<int:id>/", views.account_profile,name="account_profile"),
-    path("cards/edit/<int:id>", views.edit_account,name="edit_account"),
-    path("cards/<int:id>/", views.trannsaction_profile,name="transaction_profile"),
-    path("cards/edit/<int:id>", views.edit_transaction,name="edit_transaction"),
-    path("cards/<int:id>/", views.receipt_profile,name="receipt_profile"),
-    path("cards/edit/<int:id>", views.edit_receipt,name="edit_receipt"),
+    path("accounts/<int:id>/", views.account_profile,name="account_profile"),
+    path("accounts/edit/<int:id>", views.edit_account,name="edit_account"),
+    path("transactions/<int:id>/", views.trannsaction_profile,name="transaction_profile"),
+    path("transactions/edit/<int:id>", views.edit_transaction,name="edit_transaction"),
+    path("receipts/<int:id>/", views.receipt_profile,name="receipt_profile"),
+    path("receipts/edit/<int:id>", views.edit_receipt,name="edit_receipt"),
 
     
 
