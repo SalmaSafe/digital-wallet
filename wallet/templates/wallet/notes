@@ -1,0 +1,28 @@
+#resources - Any object stored in the API server where states can be changed or transfered.
+#Attributes
+#Browser
+#Http method - instructs api server what to do to handle the client request.
+#http request - 
+#http status code - tells the client what was the outcome of the request they sent
+#201 - created(POST)
+#202 - accepted(Delete request)
+#400 - bad request 
+#200 - success 
+#401 - unauthorized 
+#404 - not found
+#405 - method not allowed
+#409 - conflict
+#500 - internal server error
+
+# Django rest framework
+
+#Onboarding 
+#authorization
+#Deposit to a wallet
+#withdraw
+#serialization - this is conversion of python data types into json
+   #- handles serialization
+   #- handles deserialization
+
+#viewset - handle an api request and get the correct data , and serialize it using a serializer
+#    
