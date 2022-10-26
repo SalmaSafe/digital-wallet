@@ -6,6 +6,9 @@ from wallet.models import Account, Card, Customer, Receipt, Transaction, Wallet
 
 from . import models
 from . import forms
+from rest_framework import views
+from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
 #what is contained inside a http request
 # Create your views here.
 def register_customer(request):
@@ -73,7 +76,28 @@ def edit_account(request,id):
 
     else:
             form=forms.AccountRegistrationForm(instance=account)
-    return render(request, "wallet/edit_account.html",{"form":form})           
+    return render(request, "wallet/edit_account.html",{"form":form})
+
+# class AccountDepositView(views.APIView):
+#    """
+#    This class allows deposit of funds to an account.
+#    Accepts this JSON data
+#    {
+#        "account_id": 123,
+#        "amount": 1000
+#    }
+#    This API needs Authentication and Permissions to be added
+#    """
+#    def post(self, request, format=None):       
+#        account_id = request.data["account_id"]
+#        amount = request.data["amount"]
+#        try:
+#            account = Account.objects.get(id=account_id)
+#        except ObjectDoesNotExist:
+#            return Response("Account Not Found", status=404)
+      
+#        message, status = account.deposit(amount)
+#        return Response(message, status=status)               
 
 
 

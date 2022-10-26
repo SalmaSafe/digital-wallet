@@ -16,6 +16,9 @@ from .serializers import TransactionSerilaizers
 from .serializers import LoanSerilaizers
 from .serializers import ReceiptSerilaizers
 from .serializers import NotificationSerilaizers
+from rest_framework import views
+from rest_framework.response import Response
+from django.core.exceptions import ObjectDoesNotExist
 
 # Create your views here.
 
@@ -30,6 +33,133 @@ class WalletViewSet(viewsets.ModelViewSet):
 class AccountViewSet(viewsets.ModelViewSet):
     queryset = Account.objects.all()
     serializer_class = AccountSerilaizers
+
+class AccountDepositView(views.APIView):
+   """
+   This class allows deposit of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.deposit(amount)
+       return Response(message, status=status)
+
+class AccountWithdrawView(views.APIView):
+   """
+   This class allows withdraw of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.withdraw(amount)
+       return Response(message, status=status)
+class AccountTransferView(views.APIView):
+   """
+   This class allows withdraw of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.transfer(amount)
+       return Response(message, status=status)
+
+class AccountRequestLoanView(views.APIView):
+   """
+   This class allows withdraw of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.request_loan(amount)
+       return Response(message, status=status) 
+
+class AccountRepayLoanView(views.APIView):
+   """
+   This class allows withdraw of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.repay_loan(amount)
+       return Response(message, status=status)  
+
+class AccountBuyAirtimeView(views.APIView):
+   """
+   This class allows withdraw of funds to an account.
+   Accepts this JSON data
+   {
+       "account_id": 123,
+       "amount": 1000
+   }
+   This API needs Authentication and Permissions to be added
+   """
+   def post(self, request, format=None):       
+       account_id = request.data["account_id"]
+       amount = request.data["amount"]
+       try:
+           account = Account.objects.get(id=account_id)
+       except ObjectDoesNotExist:
+           return Response("Account Not Found", status=404)
+      
+       message, status = account.buy_airtime(amount)
+       return Response(message, status=status)                  
+
+
 
 class CardViewSet(viewsets.ModelViewSet):
     queryset = Card.objects.all()

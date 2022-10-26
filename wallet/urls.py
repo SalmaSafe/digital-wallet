@@ -27,6 +27,7 @@ urlpatterns=[
     path("customers/edit/<int:id>/",views.edit_customer,name="edit_customer"),
     path("accounts/<int:id>/", views.account_profile,name="account_profile"),
     path("accounts/edit/<int:id>", views.edit_account,name="edit_account"),
+   
     path("wallets/<int:id>/", views.wallet_profile,name="wallet_profile"),
     path("wallets/edit/<int:id>", views.edit_wallet,name="edit_wallet"),
     path("cards/<int:id>/", views.card_profile,name="card_profile"),
