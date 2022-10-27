@@ -41,9 +41,9 @@ class Account(models.Model):
            message =  "Invalid amount"
            status = 403
        else:
-           self.account_balance += amount
+           self.balance += amount
            self.save()
-           message = f"You have deposited {amount}, your new balance is {self.account_balance}"
+           message = f"You have deposited {amount}, your new balance is {self.balance}"
            status = 200
        return message, status
     def transfer(self, destination, amount):
@@ -51,16 +51,16 @@ class Account(models.Model):
            message =  "Invalid amount"
            status = 403
       
-       elif amount < self.account_balance:
+       elif amount < self.balance:
            message =  "Insufficient balance"
            status = 403
       
        else:
-           self.account_balance -= amount
+           self.balance -= amount
            self.save()
            destination.deposit(amount)
           
-           message = f"You have transfered {amount}, your new balance is {self.account_balance}"
+           message = f"You have transfered {amount}, your new balance is {self.balance}"
            status = 200
        return message, status 
     def withdraw(self, amount):
@@ -68,36 +68,36 @@ class Account(models.Model):
            message =  "Invalid amount"
            status = 403
        else:
-           self.account_balance -= amount
+           self.balance -= amount
            self.save()
-           message = f"You have withdrawn {amount}, your new balance is {self.account_balance}"
+           message = f"You have withdrawn {amount}, your new balance is {self.balance}"
            status = 200
        return message, status 
-    def transfer(self, destination, amount):
-       if amount <= 0:
-           message =  "Invalid amount"
-           status = 403
+    # def transfer(self, destination, amount):
+    #    if amount <= 0:
+    #        message =  "Invalid amount"
+    #        status = 403
       
-       elif amount < self.account_balance:
-           message =  "Insufficient balance"
-           status = 403
+    #    elif amount < self.balance:
+    #        message =  "Insufficient balance"
+    #        status = 403
       
-       else:
-           self.account_balance -= amount
-           self.save()
-           destination.withdraw(amount)
+    #    else:
+    #        self.balance -= amount
+    #        self.save()
+    #        destination.withdraw(amount)
           
-           message = f"You have withdrawn {amount}, your new balance is {self.account_balance}"
-           status = 200
-       return message, status
+    #        message = f"You have withdrawn {amount}, your new balance is {self.balance}"
+    #        status = 200
+    #    return message, status
     def request_loan(self, amount):
        if amount <= 0:
            message =  "Invalid amount"
            status = 403
        else:
-           self.account_balance += amount
+           self.balance += amount
            self.save()
-           message = f"You have received {amount}, your new balance is {self.account_balance}"
+           message = f"Your loan of {amount} was granted successfully, your new balance is {self.balance}"
            status = 200
        return message, status 
 
@@ -106,9 +106,9 @@ class Account(models.Model):
            message =  "Invalid amount"
            status = 403
        else:
-           self.account_balance -= amount
+           self.balance -= amount
            self.save()
-           message = f"You have used {amount} to repay for your loan, your new balance is {self.account_balance}"
+           message = f"You have used {amount} to repay for your loan, your new balance is {self.balance}"
            status = 200
        return message, status  
     def buy_airtime(self, amount):
@@ -116,9 +116,9 @@ class Account(models.Model):
            message =  "Invalid amount"
            status = 403
        else:
-           self.account_balance -= amount
+           self.balance -= amount
            self.save()
-           message = f"You have bought airtime for {amount}, your new balance is {self.account_balance}"
+           message = f"You have bought airtime for {amount}, your new balance is {self.balance}"
            status = 200
        return message, status      
 
